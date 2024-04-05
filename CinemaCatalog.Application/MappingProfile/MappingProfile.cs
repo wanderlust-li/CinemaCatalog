@@ -12,6 +12,7 @@ public class MappingProfile : Profile
     {
         CreateMap<Film, FilmDTO>();
         CreateMap<Category, CategoryDTO>();
+        CreateMap<Category, CategoryWithDetailsDTO>();
         CreateMap<FilmCategory, FilmCategoryDTO>()
             .ForMember(dest => dest.Film, opt => opt.MapFrom(src => src.Film))
             .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Category));
