@@ -15,8 +15,7 @@ public class FilmService : IFilmService
     private readonly IRepository<Film> _filmRepository;
     private readonly IRepository<Category> _categoryRepository;
     private readonly IMapper _mapper;
-
-    // Внедрення залежностей IRepository<FilmCategory> та IMapper
+    
     public FilmService(IRepository<FilmCategory> filmCategoryRepository, IMapper mapper,
         IRepository<Film> filmRepository, IRepository<Category> categoryRepository)
     {
@@ -130,20 +129,17 @@ public class FilmService : IFilmService
 
     public async Task<FilmDTO> UpdateFilm(UpdateFilmDTO updateFilmDto)
     {
-        // Знайдіть фільм, який потрібно оновити
         var film = await _filmRepository.FindByIdAsync(updateFilmDto.Id);
         if (film == null)
         {
             throw new NotFoundException($"Film with ID {updateFilmDto.Id} not found.");
         }
-
-        // Оновіть поля фільму
+        
         film.Name = updateFilmDto.Name;
         film.Director = updateFilmDto.Director;
         film.Release = updateFilmDto.Release;
         await _filmRepository.SaveChangesAsync();
-
-        // Видаліть існуючі зв'язки фільму з категоріями
+        
         var existingFilmCategories = await _filmCategoryRepository.Query()
             .Where(fc => fc.FilmId == film.Id)
             .ToListAsync();
@@ -152,8 +148,7 @@ public class FilmService : IFilmService
             _filmCategoryRepository.RemoveByIdAsync(fc.Id);
         }
         await _filmCategoryRepository.SaveChangesAsync();
-
-        // Додайте нові зв'язки з категоріями
+        
         foreach (var categoryId in updateFilmDto.CategoryIds)
         {
             var newFilmCategory = new FilmCategory
@@ -164,8 +159,7 @@ public class FilmService : IFilmService
             await _filmCategoryRepository.AddAsync(newFilmCategory);
         }
         await _filmCategoryRepository.SaveChangesAsync();
-
-        // Підготуйте і поверніть оновлений DTO
+        
         var updatedFilmDTO = _mapper.Map<FilmDTO>(film);
         updatedFilmDTO.Categories = await _categoryRepository.Query()
             .Where(c => updateFilmDto.CategoryIds.Contains(c.Id))

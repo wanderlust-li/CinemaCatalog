@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinemaCatalog.Application",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinemaCatalog.Infrastructure", "CinemaCatalog.Infrastructure\CinemaCatalog.Infrastructure.csproj", "{51D4BEB5-EA78-46E9-A273-C7B4CF73E2BD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinemaCatalog.Web", "CinemaCatalog.Web\CinemaCatalog.Web.csproj", "{62015911-2998-4ACD-A39E-B4BEB37B7006}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{51D4BEB5-EA78-46E9-A273-C7B4CF73E2BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{51D4BEB5-EA78-46E9-A273-C7B4CF73E2BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{51D4BEB5-EA78-46E9-A273-C7B4CF73E2BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62015911-2998-4ACD-A39E-B4BEB37B7006}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62015911-2998-4ACD-A39E-B4BEB37B7006}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62015911-2998-4ACD-A39E-B4BEB37B7006}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62015911-2998-4ACD-A39E-B4BEB37B7006}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
