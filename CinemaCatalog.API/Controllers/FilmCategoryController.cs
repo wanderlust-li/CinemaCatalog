@@ -17,15 +17,7 @@ public class FilmCategoryController : ControllerBase
     [HttpGet("get-all")]
     public async Task<IActionResult> GetAllFilmCategories()
     {
-        try
-        {
-            var filmCategories = await _filmCategoryService.GetFilmCategory();
-            return Ok(filmCategories);
-        }
-        catch (Exception ex)
-        {
-            // Обробка помилок
-            return StatusCode(500, $"Internal server error: {ex.Message}");
-        }
+        var filmCategories = await _filmCategoryService.GetFilmCategory();
+        return Ok(filmCategories);
     }
 }

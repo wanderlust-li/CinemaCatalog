@@ -1,40 +1,33 @@
+using AutoMapper;
+using CinemaCatalog.Application.DTO.FilmCategoryDTO;
+using CinemaCatalog.Application.DTO.FilmDTO;
+using CinemaCatalog.Application.IRepository;
 using CinemaCatalog.Application.IService;
 using CinemaCatalog.Domain;
-using Dapper;
-using Microsoft.Data.SqlClient;
-using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore;
 
 namespace CinemaCatalog.Application.Service;
 
 public class FilmCategoryService : IFilmCategoryService
 {
-    private readonly string _connectionString;
-
-    public FilmCategoryService(IConfiguration configuration)
+    private readonly IRepository<FilmCategory> _filmCategoryRepository;
+    private readonly IMapper _mapper;
+    
+    public FilmCategoryService(IRepository<FilmCategory> filmCategoryRepository, IMapper mapper)
     {
-        _connectionString = configuration.GetConnectionString("DefaultConnection");
-
+        _filmCategoryRepository = filmCategoryRepository;
+        _mapper = mapper;
     }
 
-    public async Task<List<FilmCategory>> GetFilmCategory()
+    public async Task<List<FilmCategoryDTO>> GetFilmCategory()
     {
-        using (var connection = new SqlConnection(_connectionString))
-        {
-            var result = await connection.QueryAsync<FilmCategory, Film, Category, FilmCategory>(
-                @"SELECT FC.*, F.*, C.*
-                      FROM FilmCategories FC
-                      JOIN Films F ON FC.FilmId = F.Id
-                      JOIN Categories C ON FC.CategoryId = C.Id",
-                (filmCategory, film, category) =>
-                {
-                    filmCategory.Film = film;
-                    filmCategory.Category = category;
-                    return filmCategory;
-                },
-                splitOn: "Id,Id"
-            );
+        var query = _filmCategoryRepository.Query()
+            .Include(filmCategory => filmCategory.Film)
+            .Include(filmCategory => filmCategory.Category);
 
-            return result.AsList();
-        }
+        var filmCategories = await query.ToListAsync();
+
+        return _mapper.Map<List<FilmCategoryDTO>>(filmCategories);
     }
+
 }

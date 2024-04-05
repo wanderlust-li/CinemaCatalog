@@ -14,6 +14,7 @@ public static class ApplicationServiceRegistration
     {
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
         services.AddScoped<IFilmCategoryService, FilmCategoryService>();
+        services.AddScoped<IFilmService, FilmService>();
         
         return services;
     }

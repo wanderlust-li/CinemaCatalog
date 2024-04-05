@@ -1,4 +1,6 @@
+using CinemaCatalog.Application.IRepository;
 using CinemaCatalog.Infrastructure.DatabaseContext;
+using CinemaCatalog.Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,6 +15,8 @@ public static class InfrastructureServiceRegistration
         services.AddDbContext<CinemaCatalogContext>(options => {
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
         });
+        
+        services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
         
         return services;
     }
