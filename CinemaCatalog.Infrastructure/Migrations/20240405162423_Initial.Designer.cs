@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CinemaCatalog.Infrastructure.Migrations
 {
     [DbContext(typeof(CinemaCatalogContext))]
-    [Migration("20240404150704_Initial")]
+    [Migration("20240405162423_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -45,6 +45,24 @@ namespace CinemaCatalog.Infrastructure.Migrations
                     b.HasIndex("ParentCategoryId");
 
                     b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Science Fiction"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Adventure"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Drama",
+                            ParentCategoryId = 1
+                        });
                 });
 
             modelBuilder.Entity("CinemaCatalog.Domain.Film", b =>
@@ -69,6 +87,22 @@ namespace CinemaCatalog.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Films");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Director = "Christopher Nolan",
+                            Name = "Inception",
+                            Release = new DateTime(2010, 7, 16, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Director = "Christopher Nolan",
+                            Name = "Interstellar",
+                            Release = new DateTime(2014, 11, 7, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("CinemaCatalog.Domain.FilmCategory", b =>
@@ -92,6 +126,32 @@ namespace CinemaCatalog.Infrastructure.Migrations
                     b.HasIndex("FilmId");
 
                     b.ToTable("FilmCategories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CategoryId = 1,
+                            FilmId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CategoryId = 3,
+                            FilmId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CategoryId = 1,
+                            FilmId = 2
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CategoryId = 2,
+                            FilmId = 2
+                        });
                 });
 
             modelBuilder.Entity("CinemaCatalog.Domain.Category", b =>

@@ -13,7 +13,7 @@ public static class InfrastructureServiceRegistration
         services.AddDbContext<CinemaCatalogContext>(options => {
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
         });
-       
+        
         return services;
     }
 }

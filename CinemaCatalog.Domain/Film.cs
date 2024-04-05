@@ -7,10 +7,5 @@ public class Film
     public string Director { get; set; }
     public DateTime Release { get; set; }
     
-    public virtual ICollection<FilmCategory> FilmCategories { get; set; }
-
-    public Film()
-    {
-        FilmCategories = new HashSet<FilmCategory>();
-    }
+    public ICollection<FilmCategory> FilmCategories { get; set; } = new List<FilmCategory>();
 }

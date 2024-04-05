@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace CinemaCatalog.Infrastructure.Migrations
 {
     /// <inheritdoc />
@@ -69,6 +71,40 @@ namespace CinemaCatalog.Infrastructure.Migrations
                         principalTable: "Films",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "Id", "Name", "ParentCategoryId" },
+                values: new object[,]
+                {
+                    { 1, "Science Fiction", null },
+                    { 2, "Adventure", null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Films",
+                columns: new[] { "Id", "Director", "Name", "Release" },
+                values: new object[,]
+                {
+                    { 1, "Christopher Nolan", "Inception", new DateTime(2010, 7, 16, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 2, "Christopher Nolan", "Interstellar", new DateTime(2014, 11, 7, 0, 0, 0, 0, DateTimeKind.Unspecified) }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "Id", "Name", "ParentCategoryId" },
+                values: new object[] { 3, "Drama", 1 });
+
+            migrationBuilder.InsertData(
+                table: "FilmCategories",
+                columns: new[] { "Id", "CategoryId", "FilmId" },
+                values: new object[,]
+                {
+                    { 1, 1, 1 },
+                    { 3, 1, 2 },
+                    { 4, 2, 2 },
+                    { 2, 3, 1 }
                 });
 
             migrationBuilder.CreateIndex(

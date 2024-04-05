@@ -7,8 +7,18 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="AutoMapper" Version="13.0.1" />
+      <PackageReference Include="Dapper" Version="2.1.35" />
       <PackageReference Include="FluentValidation" Version="11.9.0" />
       <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.9.0" />
+      <PackageReference Include="Microsoft.Data.SqlClient" Version="5.0.1" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.0" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="7.0.0" />
+      <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="7.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\CinemaCatalog.Domain\CinemaCatalog.Domain.csproj" />
     </ItemGroup>
 
 </Project>

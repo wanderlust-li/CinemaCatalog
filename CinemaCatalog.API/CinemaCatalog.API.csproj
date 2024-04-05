@@ -16,10 +16,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Controllers\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\CinemaCatalog.Application\CinemaCatalog.Application.csproj" />
       <ProjectReference Include="..\CinemaCatalog.Infrastructure\CinemaCatalog.Infrastructure.csproj" />
     </ItemGroup>
