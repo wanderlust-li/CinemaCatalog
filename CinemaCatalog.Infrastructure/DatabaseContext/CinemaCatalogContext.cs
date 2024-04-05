@@ -12,6 +12,4 @@ public class CinemaCatalogContext : DbContext
     public DbSet<Category> Categories { get; set; }
     public DbSet<Film> Films { get; set; }
     public DbSet<FilmCategory> FilmCategories { get; set; }
-    
-    
 }
