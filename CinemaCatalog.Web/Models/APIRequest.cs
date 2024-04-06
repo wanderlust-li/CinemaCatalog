@@ -8,5 +8,4 @@ public class APIRequest
     
     public object Data { get; set; }
     
-    public string Token { get; set; }
 }
