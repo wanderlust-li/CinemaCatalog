@@ -1,8 +1,17 @@
+using CinemaCatalog.Web.Services;
+using CinemaCatalog.Web.Services.IServices;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+builder.Services.AddHttpClient<ICategoryService, CategoryService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+
+builder.Services.AddDistributedMemoryCache();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
