@@ -15,7 +15,6 @@ public class CinemaCatalogContext : DbContext
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        // Налаштування для зв'язку багато-до-багатьох
         modelBuilder.Entity<FilmCategory>()
             .HasOne(fc => fc.Film)
             .WithMany(f => f.FilmCategories)
@@ -25,8 +24,7 @@ public class CinemaCatalogContext : DbContext
             .HasOne(fc => fc.Category)
             .WithMany(c => c.FilmCategories)
             .HasForeignKey(fc => fc.CategoryId);
-
-        // Налаштування для самопосилальної властивості Category
+        
         modelBuilder.Entity<Category>()
             .HasOne(c => c.ParentCategory)
             .WithMany(c => c.SubCategories)
