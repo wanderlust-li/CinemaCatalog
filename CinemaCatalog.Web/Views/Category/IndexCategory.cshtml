@@ -27,15 +27,24 @@
         </tr>
         </thead>
         <tbody>
-        @foreach(var item in Model){
-            <tr>
-                <td>@item.Id</td>
-                <td>@item.Name</td>
-                <td>@item.ParentCategoryId</td>
-                @*<td>
+        @if (Model != null && Model.Any())
+        {
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                    <td>@item.ParentCategoryId</td>
+                    @*<td>
                     <a asp-controller="Villa" asp-action="UpdateVilla" asp-route-villaId="@item.Id" class="btn btn-success"><i class="bi bi-pencil-square"></i></a>
                     <a asp-controller="Villa" asp-action="DeleteVilla" asp-route-villaId="@item.Id"  class="btn btn-danger"><i class="bi bi-trash-fill"></i></a>
                 </td>*@
+                </tr>
+            }
+        }
+        else{
+            <tr>
+                <td colspan="3">No categories found.</td>
             </tr>
         }
         </tbody>
